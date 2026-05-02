@@ -1,10 +1,7 @@
-import { Header } from "@/components/layout/header"
+import { BlogList } from "@/templates/blog";
 
 export default function BlogPage() {
-    return (
-        <>
-            <Header />
-            <h2>Header</h2>
-        </>
-    )
+  return(
+    <BlogList />
+  )
 }
