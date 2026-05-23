@@ -9,8 +9,8 @@ export function BlogList() {
   const query = (router.query.q as string) ?? '';
   const pageTitle = query ? `Reultados de busca para "${query}"` : 'Dicas e estratégias para impulsionar seu negócio'; 
   
-  const posts = allPosts;
-
+  const posts = query ? allPosts.filter((post) => post.title.toLowerCase().includes(query.toLowerCase())) : allPosts;
+  
   return (
     <div className="flex flex-col py-24 grow h-full">
       <header className="pb-14">
