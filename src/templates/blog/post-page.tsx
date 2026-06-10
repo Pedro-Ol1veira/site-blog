@@ -2,7 +2,6 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbS
 import { Post } from "contentlayer/generated";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/router";
 import { Avatar } from "@/components/avatar";
 import { Markdown } from "@/components/markdown";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,6 @@ export type PostPageProps = {
 } 
 
 export const PostPage = ({ post }: PostPageProps) => {
-    const router = useRouter();
     const publishedDate = new Date(post?.date).toLocaleDateString('pt-br');
     const postUrl = `https://site.set/blog/${post.slug}`;
 
