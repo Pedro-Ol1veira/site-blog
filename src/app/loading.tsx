@@ -6,7 +6,7 @@ export default function Loading() {
             <div className="relative">
                 <Loader2 
                     className="text-gray-400 animate-spin"
-                    size={62}
+                    size={64}
                 />
                 <div className="absolute top-0 left-0 w-full h-full rounded-full border-t-2 border-cyan-100 animated-[spin_3s_linear_infinite]"></div>
             </div>
