@@ -1,5 +1,11 @@
 import { Layout } from "@/components/layout";
 import "@/styles/globals.css";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Site.Set",
+    description: "Venda seus produtos como afiliado em um unico lugar",
+}
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
     return(
