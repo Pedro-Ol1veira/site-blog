@@ -1,5 +1,6 @@
 import { PostPage } from "@/templates/blog";
 import { allPosts } from "contentlayer/generated";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 type BlogPostPageProps = {
@@ -14,6 +15,32 @@ export async function generateStaticParams() {
     return allPosts.map((post) => ({
         slug: post.slug
     }));
+}
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+    const { slug } = await params;
+    const post = allPosts.find((post) => post.slug === slug);
+    
+    if(!post) return {
+        title: "Post não encontrado",
+        description: "O post que você está procurando não foi encontrado."
+    };
+
+    return {
+        title: post.title,
+        description: post.description,
+        authors: [
+            {
+                name: post.author.name,
+            }
+        ],
+        robots: "index, follow",
+        openGraph: {
+            images: [
+                post.image
+            ]
+        }
+    }
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
