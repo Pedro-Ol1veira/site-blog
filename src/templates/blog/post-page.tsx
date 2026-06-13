@@ -4,8 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Avatar } from "@/components/avatar";
 import { Markdown } from "@/components/markdown";
-import { Button } from "@/components/ui/button";
-import { useShare } from "@/hooks";
+import { PostShare } from "./components/post-share";
 
 export type PostPageProps = {
     post: Post;
@@ -15,11 +14,7 @@ export const PostPage = ({ post }: PostPageProps) => {
     const publishedDate = new Date(post?.date).toLocaleDateString('pt-br');
     const postUrl = `https://site.set/blog/${post.slug}`;
 
-    const { shareButtons } = useShare({
-        url: postUrl,
-        title: post.title,
-        text: post.description,
-    });
+    
 
     return(
         <main className="py-20 text-gray-100">
@@ -64,26 +59,11 @@ export const PostPage = ({ post }: PostPageProps) => {
                             <Markdown content={post.body.raw}/>
                         </div>
                     </article>
-                    <aside className="space-y-6">
-                        <div className="rounded-lg bg-gray-700 md:pd-6">
-                            <h2 className="hidden md:block mb-4 text-heading-xs text-gray-100">Compartilhar</h2>
-                            <div className="flex justify-start md:flex-col gap-2">
-                                {shareButtons.map((provider) => (
-                                    <Button 
-                                        key={provider.provider}
-                                        onClick={() => provider.action()}
-                                        variant='outline'
-                                        className="w-fit md:w-full justify-start gap-2"
-                                    >
-                                        {provider.icon}
-                                        <span className="hidden md:block">
-                                            {provider.name}
-                                        </span>
-                                    </Button>
-                                ))}
-                            </div>
-                        </div>
-                    </aside>
+                    <PostShare 
+                        description={post.description}
+                        url={postUrl}
+                        title={post.title}
+                    />
                 </div>
             </div>
         </main>
